@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="status">
+        <h1 class="title">Tic Tac Tow Game In Angular</h1>
+        <p *ngIf="winner!==''">{{winner}}</p>
+        <button class="reset" (click)="reset()">
+          Reset Game
+       </button>
+    </div>
+    <div class="board">
+      
+            <div  *ngFor="let item of boardArray;let i = index" (click)="oncellclick(i)" [ngClass]="item==='O'?' boxes o':'boxes'">
+                {{item}}
+            </div>
+        
+    </div>
+    
+</div>
