@@ -1,7 +1,9 @@
-.app{
-    height:100%;
-    width:100%;
-    background: #0f1B21;
-    margin:0;
-    padding: 0;
+
+.app {
+    min-height: 100vh;
+    display: flex;
+     background: #0f1B21;
+    /* align-items: center; */
+    justify-content: center;
+    overflow: hidden;
 }

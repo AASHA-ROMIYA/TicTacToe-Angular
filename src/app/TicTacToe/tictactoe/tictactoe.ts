@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-tictactoe',
@@ -43,12 +44,15 @@ export class Tictactoe {
       const [a,b,c]=pattern;
         if(this.boardArray[a]==this.boardArray[b] && this.boardArray[b]===this.boardArray[c] && this.boardArray[c]===this.boardArray[a] && this.boardArray[a]!==''){
           this.isWin=true;
+          this.winGame();
           this.winner="The Winner is "+this.boardArray[a];
+          
           break;
         }
     }
     if(this.boardArray.every(cell=>cell!=='' ) && !this.isWin){
         this.winner="It's a Draw";
+        this.drawEffect()
         this.isWin=true;
     }
     
@@ -59,5 +63,68 @@ export class Tictactoe {
     this.isWin=false;
     this.winner='';
    }
+  winGame() {
+  const duration = 2000; // 2 seconds
+  const end = Date.now() + duration;
+
+  const colors = ['#FFD700', '#FF4500', '#00E5FF', '#7C4DFF', '#FFFFFF'];
+
+  const frame = () => {
+    confetti({
+      particleCount: 8,
+      angle: 60,
+      spread: 80,
+      origin: { x: 0, y: 0.2 },
+      colors
+    });
+
+    confetti({
+      particleCount: 8,
+      angle: 120,
+      spread: 80,
+      origin: { x: 1, y: 0.2 },
+      colors
+    });
+
+    confetti({
+      particleCount: 6,
+      spread: 360,
+      startVelocity: 45,
+      gravity: 1.3,
+      scalar: 1.2,
+      origin: { x: Math.random(), y: 0 },
+      colors
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  };
+
+  frame();
+}
+drawEffect() {
+  const duration = 1500;
+  const end = Date.now() + duration;
+
+  const frame = () => {
+    confetti({
+      particleCount: 4,
+      spread: 40,
+      startVelocity: 10,
+      gravity: 0.6,
+      scalar: 0.9,
+      colors: ['#B0BEC5', '#ECEFF1'],
+      origin: { x: Math.random(), y: 0 }
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  };
+
+  frame();
+}
+
 
 }
